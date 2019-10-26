@@ -1,71 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <title>Design</title>
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-       <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Design</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
+
 <body>
-   <div class="container">
-       <div class="jumbotron jumbotron-fluid" style="background: navy; color: #ffffff;">
-           <div class="container"></div>
-           <h1 class="display-4" style="text-align: center;">New York Times Search</h1>
-       </div>
-       <div class='section row'>
-           <div class='row'>
-               <h3>Search Parameters</h3>
-               <div col-md-12>
-               <p>Search Terms</p>
-               <input type="text" class="form-control search-terms" aria-label="Sizing example input"
-                   aria-describedby="inputGroup-sizing-default">
-               </div>
-                   <br>
-               <p>Number of Records to Records to Retrieve</p>
-               <input type="text" class="form-control retrieve" aria-label="Sizing example input"
-                   aria-describedby="inputGroup-sizing-default">
-               <p>Start Year</p>
-               <input type="text" class="form-control startYear" aria-label="Sizing example input"
-                   aria-describedby="inputGroup-sizing-default">
-               <p>End Year</p>
-               <input type="text" class="form-control endYear" aria-label="Sizing example input"
-                   aria-describedby="inputGroup-sizing-default">
-                   <button type="button" class="btn btn-outline-secondary search">Search</button>
-                   <button type="button" class="btn btn-outline-secondary clear">Clear Results</button>
-           </div>
-       </div>
-       <div class='row  articles'>
-           <h3>Top Articles</h3>
-           <div class="input-group mb-3 topArticles">
-           </div>
-       </div>
-   </div>
-<script>
-const APIKey = "3buyj8qxS8N9b0FGA6OLCOeu1i8U0o4s";
-//create lets for input that pulls from form data
-// let search = // set this search variable to be populated by form data
-//template literal in the "let"'s that are above into the queryURL
-// let searchField = $("search").val();
-$(".search").click(function(){
-  let search = $(".search").val();
-  const queryURL = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&api-key=${APIKey}`;
-  $.ajax({
-      url: queryURL,
-      method: "GET"
-   }).then (function(response){
-      console.log(response);
-      console.log(queryURL);
-      // apply obtained object data to html fields
-      for( let i = 0; i < 5; i ++){
-           console.log(response.response.docs[i]);
-          $(".articles").JSON.stringify(response.response.docs[i].headline);
-          $(".articles").append("</br>");
-      }
-   });
-});
-$(".clear").click(function(){
-  $("articles").empty();
-});
-</script>
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid" style="background: navy; color: #ffffff;">
+            <div class="container"></div>
+            <h1 class="display-4" style="text-align: center;">New York Times Search</h1>
+        </div>
+        <div class='section row'>
+            <div class='row'>
+                <h3>Search Parameters</h3>
+                <div col-md-12>
+                    <p>Search Terms</p>
+                    <input type="text" class="form-control search-terms" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+                <br>
+                <p>Number of Records to Records to Retrieve</p>
+                <input type="text" class="form-control retrieve" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+                <p>Start Year</p>
+                <input type="text" class="form-control startYear" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+                <p>End Year</p>
+                <input type="text" class="form-control endYear" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+                <button type="button" class="btn btn-outline-secondary search">Search</button>
+                <button type="button" class="btn btn-outline-secondary clear">Clear Results</button>
+            </div>
+        </div>
+        <div class='row  articles'>
+            <h3>Top Articles</h3>
+            <div class="input-group mb-3 topArticles">
+            </div>
+        </div>
+    </div>
+    <script>
+        const APIKey = "3buyj8qxS8N9b0FGA6OLCOeu1i8U0o4s";
+        //create lets for input that pulls from form data
+        // let search = // set this search variable to be populated by form data
+        //template literal in the "let"'s that are above into the queryURL
+        // let searchField = $("search").val();
+        $(".search").click(function () {
+            let search = $(".search").val();
+            const queryURL =
+                `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&api-key=${APIKey}`;
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+                console.log(queryURL);
+                // apply obtained object data to html fields
+                for (let i = 0; i < 5; i++) {
+                    headlineText = JSON.stringify(response.response.docs[i].headline.main);
+                    console.log(headlineText);
+                    $(".topArticles").append(`<p> ${headlineText}</p>`);
+                }
+            });
+        });
+        $(".clear").click(function () {
+            $("articles").empty();
+        });
+    </script>
 </body>
+
 </html>
